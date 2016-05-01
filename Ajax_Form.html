@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ajax_form</title>
+    <link rel="stylesheet" href="css/form.css">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://malsup.github.io/jquery.form.js"></script>
+  </head>
+  <body>
+
+    <form id="form1" action="" method="get">
+        <input type="text" name="username" id="username" placeholder="username"/>
+        <input type="password" name="password" id="password" placeholder="password"/>
+        <button type="submit" id="submit">Submit</button>
+    </form>
+
+    <script>
+
+      $('#form1').on('submit', function() {
+        var username = $('#username').val();
+        var password = $('#password').val();
+        $(this).ajaxSubmit({
+            type: 'get',
+            url: 'index.php',
+            data: {
+                'username': username,
+                'password': password
+            },
+            success: function(data) {
+                alert('提交成功！');    //  对data做一些事情
+            },
+            error: function(){
+              alert('ERROR');
+            }
+        });
+        $(this).resetForm();   //  提交后重置表单
+        return false;    //  阻止表单自动提交事件
+      });
+
+    </script>
+
+  </body>
+</html>
